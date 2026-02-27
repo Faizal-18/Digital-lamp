@@ -28,10 +28,109 @@
       transition: background 0.5s, box-shadow 0.5s;
     }
     .dot.lit { background: #ffaa22; box-shadow: 0 0 9px 3px rgba(255,160,30,0.75); border-color: #ffaa22; }
+
+    /* ── VERTICAL SCROLLING BANNERS ── */
+    .scroll-banner {
+      position: fixed;
+      top: 0;
+      width: 40px;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scroll-banner.left  { left: 0; }
+    .scroll-banner.right { right: 0; }
+
+    .scroll-track {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      animation: scrollUp 14s linear infinite;
+      will-change: transform;
+    }
+    .scroll-banner.right .scroll-track {
+      animation: scrollDown 14s linear infinite;
+    }
+
+    @keyframes scrollUp {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    @keyframes scrollDown {
+      0%   { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
+    }
+
+    .scroll-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Georgia', serif;
+      font-size: 0.68rem;
+      font-weight: bold;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: #f5c832;
+      text-shadow:
+        0 0 6px rgba(255,190,30,0.95),
+        0 0 18px rgba(255,140,0,0.65),
+        0 0 38px rgba(255,90,0,0.3);
+      opacity: 0.90;
+    }
+
+    .scroll-banner::before,
+    .scroll-banner::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 90px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .scroll-banner::before {
+      top: 0;
+      background: linear-gradient(to bottom, #080604 0%, transparent 100%);
+    }
+    .scroll-banner::after {
+      bottom: 0;
+      background: linear-gradient(to top, #080604 0%, transparent 100%);
+    }
   </style>
 </head>
 <body>
 <div id="canvas-container">
+
+  <!-- LEFT BANNER — scrolls upward -->
+  <div class="scroll-banner left">
+    <div class="scroll-track">
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+    </div>
+  </div>
+
+  <!-- RIGHT BANNER — scrolls downward -->
+  <div class="scroll-banner right">
+    <div class="scroll-track">
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+      <span class="scroll-text">WELCOME TO EnThiran 2k26</span>
+    </div>
+  </div>
   <div id="hint">Press <strong>Enter</strong> to light a flame &nbsp;·&nbsp; Drag to rotate</div>
   <div id="flame-dots">
     <div class="dot" id="dot-0"></div><div class="dot" id="dot-1"></div>
